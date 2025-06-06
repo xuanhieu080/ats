@@ -27,4 +27,5 @@ Route::middleware([
     Route::get('/system-data/roles', function () {
         return Inertia::render('SystemData/Roles/Index');
     })->name('roles.index');
+    
 });

@@ -177,6 +177,7 @@ const logout = () => {
 											</a-menu-item>
 											<a-menu-item>
 												<NavLink
+													:no-link="true"
 													:href="route('roles.index')"
 													:active="route().current('roles.index')">
 													<a-button type="ghost" class="flex items-center justify-between w-full p-0 gap-4">
