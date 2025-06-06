@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Packages\Permission\Http\Requests\Roles\CreateRequest;
 use Packages\Permission\Http\Requests\Roles\UpdatePermissionRequest;
 use Packages\Permission\Http\Requests\Roles\UpdateRequest;
+use Packages\Permission\Http\Resources\RoleResource;
 use Packages\Permission\Models\Role;
 use Packages\Permission\Services\PermissionService;
 use Packages\Permission\Services\RoleService;
@@ -35,30 +36,26 @@ class RoleController extends Controller
         $input = $request->all();
         $data = $this->roleService->index($input);
 
-//        return view('Permission::roles.index', [
-//            'title' => 'Vai Trò',
-//            'data'  => $data
-//        ]);
+        return $this->responseIndex(RoleResource::collection($data));
     }
 
     /**
      * @throws Throwable
      */
-    public function store(CreateRequest $request): RedirectResponse
+    public function store(CreateRequest $request): JsonResponse
     {
         try {
             DB::beginTransaction();
             $input = $request->validated();
-            $this->roleService->create($input);
+            $data = $this->roleService->create($input);
             DB::commit();
         } catch (Exception $exception) {
             DB::rollBack();
-            CMS_ERROR::handle($exception);
+            $response = CMS_ERROR::handle($exception);
 
-            return redirect()->back()->with('error', 'Có lỗi xảy ra');
+            return $this->responseStoreFail($response['message']);
         }
-
-        return redirect()->back()->with('success', 'Thêm dữ liệu thành công');
+        return $this->responseStoreSuccess('', ['data' => new RoleResource($data)]);
     }
 
     public function show(Role $role)
