@@ -42,12 +42,12 @@
 						<p class="text-gray-600">Manage user roles and permissions.</p>
 						<a-button type="primary" class="w-fit" @click="handleOpenCreateModal"> Create New Role </a-button>
 						<a-table
-							:dataSource="[]"
+							:dataSource="dataSource?.data?.data"
 							:columns="columns"
 							rowKey="id"
 							:loading="false"
 							:scroll="{ x: 'max-content' }"
-							:pagination="{ pageSize: 10 }">
+							:pagination="{ pageSize: pagination.pageSize, current: pagination.current, total: pagination.total }">
 							<template #actions="{ record }">
 								<a-button type="link" :href="`/roles/${record.id}/edit`">Edit</a-button>
 								<a-button type="link" danger>Delete</a-button>
@@ -81,7 +81,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { Form, message } from 'ant-design-vue';
 import { usePagination } from 'vue-request';
 
@@ -150,6 +150,41 @@ const handleCreateRoles = async () => {
 			message.error('Failed to create role. Please check the form.');
 		});
 };
+
+const queryData = (params) => {
+    return axios.get('/api/roles', {
+        params,
+    });
+};
+
+const {
+    data: dataSource,
+    run,
+    loading,
+    current,
+    totalPage,
+    pageSize,
+} = usePagination(queryData, {
+    defaultParams: [
+        {
+            limit: 10,
+            sort: {
+                id: 'desc',
+            },
+        },
+    ],
+    pagination: {
+        currentKey: 'page',
+        pageSizeKey: 'limit',
+        totalKey: 'dataSource.data.meta.total',
+    },
+});
+
+const pagination = computed(() => ({
+    total: dataSource.value?.data?.meta.total,
+    current: current.value,
+    pageSize: pageSize.value,
+}));
 </script>
 
 <style lang="scss" scoped>
