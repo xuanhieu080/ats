@@ -30,6 +30,6 @@ Route::middleware([
         return Inertia::render('SystemData/Roles/Index');
     })->name('roles.index');
 
-    Route::post('/', [\Packages\Permission\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
+    Route::post('/system-data/roles', [\Packages\Permission\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
     
 });
