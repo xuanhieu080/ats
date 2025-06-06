@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    --primary-color: #1a4485;
+    --admin-menu-text: #33475B;
+}
+
 [x-cloak] {
     display: none;
+}
+.text-primary-color {
+    color: var(--primary-color);
+}
+.bg-primary-color {
+    background-color: var(--primary-color);
 }

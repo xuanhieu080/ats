@@ -4,10 +4,10 @@ import Welcome from '@/Components/Welcome.vue';
 </script>
 
 <template>
-    <AppLayout title="recruitment-request">
+    <AppLayout title="Recruitment Request">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Recruitment request
+                Recruitment Request
             </h2>
         </template>
 

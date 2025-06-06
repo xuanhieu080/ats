@@ -18,7 +18,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/recruitment-request', function () {
+        return Inertia::render('Recruitment/HiringRequest');
+    })->name('recruitment-request');
+    Route::get('/talent-pool', function () {
+        return Inertia::render('TalentPool/Index');
+    })->name('talent-pool');
+    Route::get('/system-data/roles', function () {
+        return Inertia::render('SystemData/Roles/Index');
+    })->name('roles.index');
 });
