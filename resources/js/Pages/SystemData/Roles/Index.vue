@@ -89,8 +89,8 @@ const columns = ref([
 	{ title: 'STT', dataIndex: 'id', key: 'id' },
 	{ title: 'Role Name', dataIndex: 'name', key: 'name' },
 	{ title: 'Description', dataIndex: 'description', key: 'description' },
-	{ title: 'Created at ', dataIndex: 'createdAt', key: 'createdAt' },
-	{ title: 'Created by ', dataIndex: 'createdBy', key: 'createdBy' },
+	{ title: 'Created at ', dataIndex: 'created_at', key: 'created_at' },
+	{ title: 'Created by ', dataIndex: 'created_by', key: 'created_by' },
 	{ title: 'Actions', key: 'actions', scopedSlots: { customRender: 'actions' }, fixed: 'right' },
 ]);
 const openCreateRoleModal = ref(false);
