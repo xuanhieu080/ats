@@ -21,11 +21,15 @@ Route::middleware([
     Route::get('/recruitment-request', function () {
         return Inertia::render('Recruitment/HiringRequest');
     })->name('recruitment-request');
+
     Route::get('/talent-pool', function () {
         return Inertia::render('TalentPool/Index');
     })->name('talent-pool');
+
     Route::get('/system-data/roles', function () {
         return Inertia::render('SystemData/Roles/Index');
     })->name('roles.index');
+
+    Route::post('/', [\Packages\Permission\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
     
 });

@@ -1,0 +1,31 @@
+{
+    "name": "hv/department",
+    "description": "Package Department",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Phan Hồng Văn",
+            "email": "phanhongvan1992@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Packages\\Department\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Packages\\Department\\Providers\\DepartmentServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

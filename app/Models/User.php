@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -26,9 +28,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
+        'phone',
         'email',
         'password',
+        'is_active',
+        'is_super',
+        'role_id',
+        'department_id',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -61,7 +71,17 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
+            'is_active'         => 'boolean',
+            'is_super'          => 'boolean',
         ];
+    }
+
+    public function role() {
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
+
+    public function department() {
+        return $this->hasOne(Department::class, 'id', 'department_id');
     }
 }

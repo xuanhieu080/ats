@@ -1,0 +1,52 @@
+<?php
+
+namespace Packages\$NAME\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Packages\$NAME\Repositories\$NAMERepository;
+use Packages\$NAME\Repositories\$NAMERepositoryInterface;
+use Illuminate\Support\Facades\File;
+
+
+class $NAMEServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        $modulePath = __DIR__.'/../../';
+
+        #php artisan vendor:publish --tag=config-$name
+        $this->publishes([
+            $modulePath.'/configs/$name.php' => config_path('$name.php'),
+        ], 'config-$name');
+
+        #php artisan make:migration create_demo_table --path=packages/$NAME/database/migrations
+        $this->loadMigrationsFrom($modulePath . 'database/migrations');
+
+        if (File::exists($modulePath . "routes/web.php")) {
+            $this->loadRoutesFrom($modulePath . "routes/web.php");
+        }
+
+        if (File::exists($modulePath . "routes/api.php")) {
+            $this->loadRoutesFrom($modulePath . "routes/api.php");
+        }
+
+        if (File::exists($modulePath . "resources/views")) {
+            $this->loadViewsFrom($modulePath . "resources/views", '$NAME');
+        }
+
+        $this->loadTranslationsFrom($modulePath . 'resources/lang', '$name');
+
+        $this->publishes([
+            $modulePath .'public' => public_path('vendor/$name'),
+        ], 'public');;
+    }
+
+    /**
+     * Register bindings in the container.
+     */
+    public function register()
+    {
+        $this->app->bind($NAMERepositoryInterface::class, $NAMERepository::class);
+    }
+
+}

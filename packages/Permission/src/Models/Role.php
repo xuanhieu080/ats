@@ -1,0 +1,10 @@
+<?php
+
+namespace Packages\Permission\Models;
+
+class Role extends \Spatie\Permission\Models\Role
+{
+    protected $fillable = [
+        'name', 'title', 'guard_name'
+    ];
+}

@@ -1,0 +1,11 @@
+<?php
+
+namespace Packages\$NAME\DTOs;
+
+class $NAMEDTO
+{
+    public function __construct($request)
+    {
+
+    }
+}

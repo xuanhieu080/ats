@@ -1,0 +1,14 @@
+<?php
+
+namespace Packages\$NAME\Repositories;
+
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+
+class $NAMERepository implements $NAMERepositoryInterface
+{
+
+}
