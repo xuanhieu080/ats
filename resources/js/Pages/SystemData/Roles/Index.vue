@@ -84,6 +84,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { reactive, ref, computed } from 'vue';
 import { Form, message } from 'ant-design-vue';
 import { usePagination } from 'vue-request';
+// import axios from 'axios';
 
 const columns = ref([
 	{ title: 'STT', dataIndex: 'id', key: 'id' },
@@ -127,11 +128,12 @@ const handleCreateRoles = async () => {
 			loadingCreate.value = true;
 			try {
 				// Simulate API call
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-				// Make it got error if the role already exists
-				if (createRoleForm.name === 'admin') {
-					throw new Error('Role already exists');
-				}
+				await axios.post(route('roles.store'), createRoleForm);
+				// await new Promise((resolve) => setTimeout(resolve, 1000));
+				// // Make it got error if the role already exists
+				// if (createRoleForm.name === 'admin') {
+				// 	throw new Error('Role already exists');
+				// }
 				// If successful, reset the form and close the modal
 				message.success('Role created successfully!');
 				resetFields();
