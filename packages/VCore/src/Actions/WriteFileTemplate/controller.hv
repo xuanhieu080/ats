@@ -1,0 +1,16 @@
+<?php
+
+namespace Packages\$NAME\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Packages\$NAME\Repositories\$NAMERepositoryInterface;
+
+class $NAMEController extends Controller
+{
+    protected $NAMERepositoryInterface $$nameRepository;
+
+    public function __construct($NAMERepositoryInterface $$nameRepository)
+    {
+        $this->$nameRepository = $$nameRepository;
+    }
+}
